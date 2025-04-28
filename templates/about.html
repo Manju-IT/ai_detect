@@ -1,0 +1,157 @@
+{% extends "base.html" %}
+
+{% block title %}About{% endblock %}
+
+{% block styles %}
+<style>
+    .about-section {
+        padding: 50px 0;
+    }
+    
+    .about-content {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 40px;
+        align-items: center;
+        margin-bottom: 50px;
+    }
+    
+    .about-text {
+        flex: 1 1 500px;
+    }
+    
+    .about-image {
+        flex: 1 1 400px;
+        text-align: center;
+    }
+    
+    .about-image img {
+        max-width: 100%;
+        border-radius: 15px;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    }
+    
+    .tech-stack {
+        margin-top: 50px;
+    }
+    
+    .tech-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 20px;
+        margin-top: 30px;
+    }
+    
+    .tech-card {
+        background: white;
+        border-radius: 10px;
+        padding: 20px;
+        text-align: center;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        transition: all 0.3s;
+    }
+    
+    .tech-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }
+    
+    .tech-icon {
+        font-size: 2.5rem;
+        color: var(--accent);
+        margin-bottom: 15px;
+    }
+    
+    .tech-name {
+        font-weight: 600;
+        color: var(--primary);
+        margin-bottom: 10px;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="about-section fade-in">
+    <div class="container">
+        <div class="section-title">
+            <h2>About This Project</h2>
+            <p>Learn more about how this age and gender detection system works</p>
+        </div>
+        
+        <div class="about-content delay-1">
+            <div class="about-text">
+                <h3>Advanced AI Detection System:</h3><br>
+                <p>
+                    
+                    <strong>🧠 What This Project is About:</strong><br>
+                    
+                    This project is a <b>Python-based application</b> that can <b>detect a person's gender and age</b> just by looking at their face either from a photo or live from a webcam.<br>
+                    
+                    It uses <b>deep learning models</b> that have been already trained to recognize patterns in faces. When you run the program:<br>
+                    -> It <b>detects the face</b> in an image or video.<br>
+                    -> Then it <b>predicts the gender</b> (Male or Female).<br>
+                    -> And also <b>predicts the age group</b> the person falls into (like 0-2 years, 25-32 years, etc.).<br>
+                    
+                    It shows this prediction visually on the image by drawing a box around the face and labeling it with the guessed gender and age.<br>
+                    
+                    <br>
+                    
+                    <strong>🛠️ How It Works:</strong> <br>
+                    
+                    -> It uses <b>OpenCV</b> (a popular computer vision library) to handle images, videos, and deep learning models.<br>
+                    -> It relies on <b>pre-trained models</b> (files like `.caffemodel`, `.pb`, `.prototxt`) to recognize faces and predict gender and age.<br>
+                    -> The models are loaded into the program and work without needing any training from your side.<br>
+                    -> You can either pass an image file to the program or simply open your webcam.<br>
+                    
+                    <br>
+                    
+                    
+                    <strong>🎯 Objective:</strong> <br>
+                    
+                    Make it easy to guess the <b>gender</b> and <b>age group</b> of people in pictures or in real-time without needing complex setup or coding — just using simple commands!
+                    
+                    
+                    
+                    </p>
+            </div>
+            <div class="about-image">
+                <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="AI Technology">
+            </div>
+        </div>
+        
+        <div class="tech-stack delay-2">
+            <h3>Technology Stack</h3>
+            <div class="tech-grid">
+                <div class="tech-card">
+                    <div class="tech-icon">
+                        <i class="fab fa-python"></i>
+                    </div>
+                    <h4 class="tech-name">Python</h4>
+                    <p>Backend processing and AI model integration</p>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-icon">
+                        <i class="fas fa-network-wired"></i>
+                    </div>
+                    <h4 class="tech-name">OpenCV</h4>
+                    <p>Computer vision and image processing</p>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h4 class="tech-name">Caffe</h4>
+                    <p>Deep learning framework for age/gender models</p>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-icon">
+                        <i class="fas fa-server"></i>
+                    </div>
+                    <h4 class="tech-name">Flask</h4>
+                    <p>Web application framework</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

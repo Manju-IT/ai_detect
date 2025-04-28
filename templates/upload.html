@@ -1,0 +1,264 @@
+{% extends "base.html" %}
+
+{% block title %}Upload Image{% endblock %}
+
+{% block styles %}
+<style>
+    .upload-section {
+        text-align: center;
+        padding: 50px 20px;
+    }
+    
+    .upload-card {
+        max-width: 600px;
+        margin: 0 auto;
+        background: white;
+        border-radius: 20px;
+        padding: 40px;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s;
+    }
+    
+    .upload-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    }
+    
+    .upload-icon {
+        font-size: 4rem;
+        color: var(--accent);
+        margin-bottom: 20px;
+    }
+    
+    .upload-title {
+        font-size: 2rem;
+        color: var(--primary);
+        margin-bottom: 15px;
+    }
+    
+    .upload-description {
+        color: #666;
+        margin-bottom: 30px;
+    }
+    
+    .file-upload {
+        position: relative;
+        margin-bottom: 30px;
+    }
+    
+    .file-upload input {
+        position: absolute;
+        left: 0;
+        top: 0;
+        opacity: 0;
+        width: 100%;
+        height: 100%;
+        cursor: pointer;
+    }
+    
+    .file-upload-label {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 40px;
+        border: 2px dashed #ccc;
+        border-radius: 15px;
+        transition: all 0.3s;
+    }
+    
+    .file-upload-label:hover {
+        border-color: var(--accent);
+        background: rgba(72, 149, 239, 0.05);
+    }
+    
+    .file-upload-label i {
+        font-size: 2.5rem;
+        color: var(--accent);
+        margin-bottom: 15px;
+    }
+    
+    .file-upload-text {
+        text-align: center;
+    }
+    
+    .file-upload-text h4 {
+        margin-bottom: 10px;
+        color: var(--dark);
+    }
+    
+    .file-upload-text p {
+        color: #888;
+        font-size: 0.9rem;
+    }
+    
+    .preview-container {
+        margin-top: 30px;
+        display: none;
+    }
+    
+    .preview-image {
+        max-width: 100%;
+        max-height: 300px;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+    
+    .features {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 30px;
+        margin-top: 50px;
+    }
+    
+    .feature-card {
+        flex: 1 1 300px;
+        background: white;
+        border-radius: 15px;
+        padding: 25px;
+        text-align: center;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        transition: all 0.3s;
+    }
+    
+    .feature-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }
+    
+    .feature-icon {
+        font-size: 2.5rem;
+        color: var(--accent);
+        margin-bottom: 15px;
+    }
+    
+    .feature-title {
+        font-size: 1.2rem;
+        color: var(--primary);
+        margin-bottom: 10px;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="upload-section fade-in">
+    <div class="upload-card delay-1">
+        <div class="upload-icon">
+            <i class="fas fa-user-tag"></i>
+        </div>
+        <h1 class="upload-title">Detect Age & Gender</h1>
+        <p class="upload-description">Upload an image to analyze faces and detect approximate age and gender using AI</p>
+        
+        <form method="post" enctype="multipart/form-data">
+            <div class="file-upload">
+                <input type="file" name="file" id="fileInput" accept="image/*" required>
+                <label for="fileInput" class="file-upload-label">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <div class="file-upload-text">
+                        <h4>Choose an image file</h4>
+                        <p>or drag and drop it here</p>
+                    </div>
+                </label>
+            </div>
+            
+            <div class="preview-container" id="previewContainer">
+                <img id="imagePreview" class="preview-image" src="#" alt="Preview">
+            </div>
+            
+            <button type="submit" class="btn">
+                <i class="fas fa-magic"></i> Analyze Image
+            </button>
+        </form>
+    </div>
+    
+    <div class="features delay-2">
+        <div class="feature-card">
+            <div class="feature-icon">
+                <i class="fas fa-bolt"></i>
+            </div>
+            <h3 class="feature-title">Fast Processing</h3>
+            <p>Get results in seconds with our optimized AI models</p>
+        </div>
+        
+        <div class="feature-card">
+            <div class="feature-icon">
+                <i class="fas fa-shield-alt"></i>
+            </div>
+            <h3 class="feature-title">Privacy Focused</h3>
+            <p>Your images are processed securely and never stored permanently</p>
+        </div>
+        
+        <div class="feature-card">
+            <div class="feature-icon">
+                <i class="fas fa-chart-line"></i>
+            </div>
+            <h3 class="feature-title">Accurate Results</h3>
+            <p>Advanced deep learning models provide reliable detection</p>
+        </div>
+    </div>
+</section>
+
+<script>
+    document.getElementById('fileInput').addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                const preview = document.getElementById('imagePreview');
+                preview.src = event.target.result;
+                document.getElementById('previewContainer').style.display = 'block';
+            }
+            reader.readAsDataURL(file);
+        }
+    });
+    
+    // Drag and drop functionality
+    const dropArea = document.querySelector('.file-upload-label');
+    
+    ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+        dropArea.addEventListener(eventName, preventDefaults, false);
+    });
+    
+    function preventDefaults(e) {
+        e.preventDefault();
+        e.stopPropagation();
+    }
+    
+    ['dragenter', 'dragover'].forEach(eventName => {
+        dropArea.addEventListener(eventName, highlight, false);
+    });
+    
+    ['dragleave', 'drop'].forEach(eventName => {
+        dropArea.addEventListener(eventName, unhighlight, false);
+    });
+    
+    function highlight() {
+        dropArea.style.borderColor = 'var(--accent)';
+        dropArea.style.backgroundColor = 'rgba(72, 149, 239, 0.1)';
+    }
+    
+    function unhighlight() {
+        dropArea.style.borderColor = '#ccc';
+        dropArea.style.backgroundColor = 'transparent';
+    }
+    
+    dropArea.addEventListener('drop', handleDrop, false);
+    
+    function handleDrop(e) {
+        const dt = e.dataTransfer;
+        const files = dt.files;
+        document.getElementById('fileInput').files = files;
+        
+        if (files.length) {
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                const preview = document.getElementById('imagePreview');
+                preview.src = event.target.result;
+                document.getElementById('previewContainer').style.display = 'block';
+            }
+            reader.readAsDataURL(files[0]);
+        }
+    }
+</script>
+{% endblock %}
